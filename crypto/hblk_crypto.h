@@ -5,6 +5,11 @@
 #include <openssl/rand.h>
 #include <openssl/sha.h>
 #include <string.h>
+/*added header for task 2 main*/
+#include <openssl/ec.h>
+#include <openssl/obj_mac.h>
+#include <openssl/ecdsa.h>
+
 
 /*task 0*/
 #define SHA256_DIGEST_LENGTH 32

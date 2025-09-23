@@ -21,6 +21,11 @@
 /*task 2*/
 #define EC_PUB_LEN 65
 
+/*task 5*/
+#define PUB_FILENAME "key_pub.pem"
+#define PRI_FILENAME "key.pem"
+
+
 /*
 *# include <openssl/sha.h>
 * # include <stdint.h>

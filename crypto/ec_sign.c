@@ -12,7 +12,7 @@
  *
  * Return: 1 on success, 0 on failure
  */
-uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
+uint8_t *_ec_sign(EC_KEY const *key, uint8_t const *msg,
 size_t msglen, sig_t *sig)
 {
 

@@ -18,6 +18,4 @@ int ec_verify(EC_KEY const *key, uint8_t const *msg,
 
 	return (ECDSA_verify(0, msg, msglen, sig->sig, sig->len,
 		(EC_KEY *)key));
-
-	return (1);
 }

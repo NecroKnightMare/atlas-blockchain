@@ -1,5 +1,4 @@
-#include <openssl/evp.h>
-#include <openssl/evp.h>
+#include <openssl/ecdsa.h>
 #include <stdlib.h>
 #include <string.h>
 #include "hblk_crypto.h"

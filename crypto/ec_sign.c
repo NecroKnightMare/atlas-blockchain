@@ -19,10 +19,10 @@ size_t msglen, sig_t *sig)
 
 	unsigned int sig_len;
 
-    if (!key || !msg || !sig)
-        return (NULL);
+	if (!key || !msg || !sig)
+		return (NULL);
 
-    sig->sig = NULL;
+	sig->sig = NULL;
 	sig->len = 0;
 
 	sig_len = ECDSA_size((EC_KEY *)key);

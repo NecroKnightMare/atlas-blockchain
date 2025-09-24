@@ -37,5 +37,6 @@ size_t msglen, sig_t *sig)
 		return (NULL);
 	}
 	sig->len = sig_len;
-	return (sig->sig);
+	/*return (sig->sig);*/
+	return ec_sign(key, msg, msglen, sig);
 }

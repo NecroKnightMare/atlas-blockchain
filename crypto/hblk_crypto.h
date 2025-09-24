@@ -26,6 +26,11 @@
 #define PRI_FILENAME "key.pem"
 
 /*task 6*/
+/**
+ * struct sig_s - EC Signature structure
+ * @sig: Signature buffer
+ * @len: Actual signature size can't exceed SIG_MAX_LEN, stored on a byte
+*/
 typedef struct sig_s
 {
 	uint8_t *sig;

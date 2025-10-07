@@ -2,7 +2,7 @@
 #include <string.h>
 #include "blockchain.h"
 
-	static const block_t genesis = {
+	static const block_t genesis_block = {
 		.info = {
 			.index = 0,
 			.difficulty = 0,

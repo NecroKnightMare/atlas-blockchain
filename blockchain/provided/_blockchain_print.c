@@ -92,7 +92,7 @@ static int _block_print_brief(block_t const *block, unsigned int index,
 
 	printf("%s\tdata: { ", indent);
 	printf("\"%s\", ", block->data.buffer);
-	printf("%zu", block->data.len);
+	printf("%lu", block->data.len);
 	printf(" },\n");
 
 	printf("%s\thash: ", indent);

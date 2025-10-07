@@ -2,14 +2,6 @@
 #include <string.h>
 #include "blockchain.h"
 
-/**
- * blockchain_create - Creates a new blockchain and inits the genesis block
- * Return: pointer to the new blockchain or NULL if failed
- */
-blockchain_t *blockchain_create(void)
-{
-	blockchain_t *blockchain;
-	block_t *genesis;
 	static const block_t genesis = {
 		.info = {
 			.index = 0,
@@ -27,8 +19,17 @@ blockchain_t *blockchain_create(void)
 			0xdf, 0x2a, 0x97, 0xd4, 0x8d, 0x0c, 0x8e, 0x00, 0x09, 0xc8, 0x17,
 			0xf2, 0xb1, 0xd3, 0xd7, 0xff, 0x2f, 0x04, 0x51, 0x58, 0x03
 		}/* c52c26c8b5461639635d8edf2a97d48d0c8e0009c817f2b1d3d7ff2f04515803 */
-	}
-};
+	};
+
+/**
+ * blockchain_create - Creates a new blockchain and inits the genesis block
+ * Return: pointer to the new blockchain or NULL if failed
+ */
+blockchain_t *blockchain_create(void)
+{
+	blockchain_t *blockchain;
+	block_t *genesis;
+
 	blockchain = malloc(sizeof(*blockchain));
 	if (!blockchain)
 		return (NULL);
@@ -53,3 +54,6 @@ blockchain_t *blockchain_create(void)
 		free(blockchain);
 		return (NULL);
 	}
+
+	return (blockchain);
+}

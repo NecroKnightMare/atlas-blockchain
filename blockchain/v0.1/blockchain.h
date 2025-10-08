@@ -9,8 +9,6 @@
 
 #define BLOCKCHAIN_DATA_MAX 1024
 
-extern const block_t _genesis;
-
 
 /*block info struct*/
 typedef struct block_info_s
@@ -36,6 +34,8 @@ typedef struct block_s
 	block_data_t data;
 	uint8_t hash[SHA256_DIGEST_LENGTH];
 } block_t;
+
+extern const block_t _genesis;
 
 /*Blockchain struct*/
 typedef struct blockchain_s

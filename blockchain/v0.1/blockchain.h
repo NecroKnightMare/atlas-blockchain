@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include <llist.h>
 #include <openssl/sha.h>
-#include "provided/_genesis.c"
+
 
 #define BLOCKCHAIN_DATA_MAX 1024
 

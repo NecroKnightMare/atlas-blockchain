@@ -5,11 +5,11 @@
 #include <stddef.h>
 #include <llist.h>
 #include <openssl/sha.h>
-
+#include "provided/_genesis.c"
 
 #define BLOCKCHAIN_DATA_MAX 1024
 
-extern const block_t _genesis;
+/*extern const block_t _genesis;*/
 
 
 /*block info struct*/

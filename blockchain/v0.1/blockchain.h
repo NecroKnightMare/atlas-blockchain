@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include "provided/endianness.h"
 #include <llist.h>
 #include <openssl/sha.h>
 

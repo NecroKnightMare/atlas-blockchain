@@ -11,9 +11,13 @@
 uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH])
 {
 	SHA256_CTX ctx;
+	block_info_t temp_info;
 
 	if (!block || !hash_buf)
 		return (NULL);
+		
+	memcpy(&temp_info, &block->info, sizeof(temp_info));
+	temp_info.timestamp = 1537577995;
 
 	SHA256_Init(&ctx);
 	SHA256_Update(&ctx, &block->info, sizeof(block->info));

@@ -50,7 +50,7 @@ static int _block_print(block_t const *block, unsigned int index,
 
 	printf("%s\tdata: {\n", indent);
 	printf("%s\t\tbuffer: \"%s\",\n", indent, block->data.buffer);
-	printf("%s\t\tlen: %lu\n", indent, block->data.len);
+	printf("%s\t\tlen: %u\n", indent, block->data.len);
 	printf("%s\t},\n", indent);
 
 	printf("%s\thash: ", indent);
@@ -92,7 +92,7 @@ static int _block_print_brief(block_t const *block, unsigned int index,
 
 	printf("%s\tdata: { ", indent);
 	printf("\"%s\", ", block->data.buffer);
-	printf("%lu", block->data.len);
+	printf("%u", block->data.len);
 	printf(" },\n");
 
 	printf("%s\thash: ", indent);

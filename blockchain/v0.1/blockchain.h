@@ -24,7 +24,7 @@ typedef struct block_info_s
 typedef struct block_data_s
 {
 	int8_t buffer[BLOCKCHAIN_DATA_MAX];
-	size_t len;
+	unsigned int len;
 } block_data_t;
 
 /*Block struct*/

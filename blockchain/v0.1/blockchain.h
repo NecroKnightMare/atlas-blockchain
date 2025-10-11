@@ -43,6 +43,7 @@ typedef struct blockchain_s
 	llist_t *chain;
 } blockchain_t;
 
+/* v0.1 prototypes */
 blockchain_t *blockchain_create(void);
 block_t *block_create(block_t const *prev, int8_t const *data,
 	uint32_t data_len);
@@ -55,5 +56,8 @@ uint8_t *block_hash(block_t const *block, uint8_t
 int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 blockchain_t *blockchain_deserialize(char const *path);
 int block_is_valid(block_t const *block, block_t const *prev_block);
+
+/*v0.2 prototypes*/
+int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH], uint32_t difficulty);
 
 #endif // BLOCKCHAIN_H

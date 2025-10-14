@@ -1,4 +1,5 @@
 #include "blockchain.h"
+#include <string.h>
 
 /**
  * block_is_valid - checks if valid against prev block

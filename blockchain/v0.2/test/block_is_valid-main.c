@@ -26,7 +26,7 @@ int main(void)
         fprintf(stderr, "Block invalid\n");
         return (EXIT_FAILURE);
     }
-    printf("Block is valid\n");
+    printf("Block valid\n");
 
     blockchain_destroy(blockchain);
 

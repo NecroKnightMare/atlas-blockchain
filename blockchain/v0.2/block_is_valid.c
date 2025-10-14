@@ -28,7 +28,7 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 		SHA256_DIGEST_LENGTH) != 0)
 		return (0);
 
-	if (!hash_matches_difficulty(block->hash, block->info.difficulty))
+	if (!hash_matches_difficulty(hash_buf, block->info.difficulty))
 		return (0);
 
 	return (1);

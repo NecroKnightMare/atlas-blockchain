@@ -3,9 +3,10 @@
 #include "blockchain.h"
 
 /**
- * hash_matches_difficulty - Check if a given hash meets the specified difficulty level
- * @hash: Pointer to the hash to be checked (32 bytes)
- * @difficulty: The difficulty level (number of leading zero bits required)
+ * hash_matches_difficulty - Check if a given hash
+ * meets specified difficulty level
+ * @hash: pointer to the hash to be checked (32 bytes)
+ * @difficulty: difficulty level
  * Return: 1 if the hash meets the difficulty, otherwise 0
  */
 int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],

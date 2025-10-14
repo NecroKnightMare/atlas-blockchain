@@ -8,14 +8,15 @@
  * @difficulty: The difficulty level (number of leading zero bits required)
  * Return: 1 if the hash meets the difficulty, otherwise 0
  */
-int hash_matches_difficulty(uint8_t const *hash, uint32_t difficulty)
+int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
+	uint32_t difficulty)
 {
     uint32_t i, bits;
 
     if (!hash || difficulty > SHA256_DIGEST_LENGTH * 8)
         return (0);
 
-    for (i = 0; i < SHA256_DIGEST_LENGTH && difficulty > 0)
+    for (i = 0; i < SHA256_DIGEST_LENGTH && difficulty > 0; i++)
     {
         if (difficulty >= 8)
 		{
@@ -31,6 +32,5 @@ int hash_matches_difficulty(uint8_t const *hash, uint32_t difficulty)
 			difficulty = 0;
 		}
 	}
-
     return (1);
 }

@@ -29,10 +29,10 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 		return (0);
 
 	if (!hash_matches_difficulty(hash_buf, block->info.difficulty))
-		return (0);
+		return (false);
 
 	if (hash_matches_difficulty(hash_buf, block->info.difficulty) != 0)
 		return (0);
-		
+
 	return (1);
 }

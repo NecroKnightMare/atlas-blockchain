@@ -22,9 +22,11 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 	if (!last_block)
 		return (0);
 
-	if (last_block->info.index == 0 || last_block->info.index % DIFFICULTY_ADJUSTMENT_INTERVAL != 0)
+	if (last_block->info.index == 0 || last_block->info.index %
+		DIFFICULTY_ADJUSTMENT_INTERVAL != 0)
 		return (last_block->info.difficulty);
-	adjust = llist_get_node_at(blockchain->chain, size - DIFFICULTY_ADJUSTMENT_INTERVAL);
+	adjust = llist_get_node_at(blockchain->chain, size -
+		DIFFICULTY_ADJUSTMENT_INTERVAL);
 
 	if (!adjust)
 		return (last_block->info.difficulty);

@@ -3,7 +3,7 @@
 /**
  * blockchain_difficulty - returns difficulty of last block in blockchain
  * @blockchain: pointer to blockchain
- * Return: difficulty oto assign next block
+ * Return: difficulty to assign next block
  */
 uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 {
@@ -30,8 +30,10 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 
 	if (!adjust)
 		return (last_block->info.difficulty);
-	expected_time = BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL;
-	actual_time = last_block->info.timestamp - adjust->info.timestamp;
+	expected_time = BLOCK_GENERATION_INTERVAL *
+	DIFFICULTY_ADJUSTMENT_INTERVAL;
+	actual_time = last_block->info.timestamp -
+	adjust->info.timestamp;
 	
 	if (actual_time < expected_time / 2)
 		return (adjust->info.difficulty + 1);

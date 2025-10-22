@@ -11,7 +11,22 @@
 uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH])
 {
 	SHA256_CTX ctx;
-	block_info_t temp_info;
+	uint8_t buf[sizeof(block->info) + sizeof(block->data.len) +
+		block->data.len];
+
+	memcpy(buf, &block->info, sizeof(block->info));
+	memcpy(buf + sizeof(block->info), &block->data.len,
+	sizeof(block->data.len));
+	memcpy(buf + sizeof(block->info) + sizeof(block->data.len),
+	block->data.buffer, block->data.len);
+
+	sha256_init(&ctx);
+	sha256_update(&ctx, buf, sizeof(buf));
+	sha256_final(&ctx, hash_buf);
+
+	return (0);
+
+	/*block_info_t temp_info;
 
 	if (!block || !hash_buf)
 		return (NULL);
@@ -24,5 +39,5 @@ uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH]
 	SHA256_Update(&ctx, &block->data, sizeof(block->data));
 	SHA256_Final(hash_buf, &ctx);
 
-	return (hash_buf);
+	return (hash_buf);*/
 }

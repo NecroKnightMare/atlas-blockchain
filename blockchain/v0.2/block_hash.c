@@ -20,9 +20,9 @@ uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH]
 	memcpy(buf + sizeof(block->info) + sizeof(block->data.len),
 	block->data.buffer, block->data.len);
 
-	sha256_init(&ctx);
-	sha256_update(&ctx, buf, sizeof(buf));
-	sha256_final(&ctx, hash_buf);
+	SHA256_Init(&ctx);
+	SHA256_Update(&ctx, buf, sizeof(buf));
+	SHA256_Final(&ctx, hash_buf);
 
 	return (0);
 

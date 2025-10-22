@@ -22,7 +22,7 @@ uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH]
 
 	SHA256_Init(&ctx);
 	SHA256_Update(&ctx, buf, sizeof(buf));
-	SHA256_Final(&ctx, hash_buf);
+	SHA256_Final(hash_buf, &ctx);
 
 	return (0);
 

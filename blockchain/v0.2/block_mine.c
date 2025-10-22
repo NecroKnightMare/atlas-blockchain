@@ -13,8 +13,10 @@ void block_mine(block_t *block)
 	block->info.nonce = 0;
 
 	do {
-		block->info.nonce++;
 		block_hash(block, block->hash);
-	} while (!hash_matches_difficulty(block->hash,
-		block->info.difficulty));
+		if (hash_matches_difficulty(block->hash,
+			block->info.difficulty))
+			break;
+		block->info.nonce++;
+	} while (1);
 }

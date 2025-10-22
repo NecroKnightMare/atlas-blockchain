@@ -11,8 +11,7 @@ void block_mine(block_t *block)
 	if (!block)
 		return;
 	block->info.nonce = 0;
-	memset(block->hash, 0, SHA256_DIGEST_LENGTH);
-	
+
 	do {
 		block->info.nonce++;
 		block_hash(block, block->hash);

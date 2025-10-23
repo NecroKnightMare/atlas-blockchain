@@ -1,6 +1,5 @@
 #include "blockchain.h"
 #include <string.h>
-#include <stdbool.h>
 
 /**
  * block_is_valid - checks if valid against prev block

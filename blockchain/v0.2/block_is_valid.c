@@ -8,16 +8,6 @@
  * Return: 1 if valid, 0 otherwise
  */
 int block_is_valid(block_t const *block, block_t const *prev_block)
-#include "blockchain.h"
-#include <string.h>
-
-/**
- * block_is_valid - verifies that a Block is valid
- * @block: pointer to the Block to check
- * @prev_block: pointer to the previous Block in the chain, or NULL if genesis
- * Return: 1 if valid, 0 otherwise
- */
-int block_is_valid(block_t const *block, block_t const *prev_block)
 {
 	uint8_t hash_buf[SHA256_DIGEST_LENGTH];
 	uint8_t prev_hash_buf[SHA256_DIGEST_LENGTH];
@@ -55,10 +45,8 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 		return (0);
 
 	return (1);
-}
-/*{
-	uint8_t hash_buf[SHA256_DIGEST_LENGTH];
-
+/*
+	uint8_t hash_buf[SHA256_DIGEST_LENGTH]
 	if (!block)
 		return (0);
 
@@ -88,4 +76,5 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 	if (!hash_matches_difficulty(block->hash, block->info.difficulty))
 		return (0);
 	return (1);
-}*/
+*/
+}

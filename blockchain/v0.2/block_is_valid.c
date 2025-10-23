@@ -45,36 +45,4 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 		return (0);
 
 	return (1);
-/*
-	uint8_t hash_buf[SHA256_DIGEST_LENGTH]
-	if (!block)
-		return (0);
-
-	if (!prev_block)
-	{
-		block_hash(block, hash_buf);
-		if (memcmp(block->hash, hash_buf, SHA256_DIGEST_LENGTH) != 0)
-			return (0);
-		return (1);
-	}
-
-	if (block->info.index != prev_block->info.index + 1)
-		return (0);
-
-	if (memcmp(block->info.prev_hash, prev_block->hash,
-		SHA256_DIGEST_LENGTH) != 0)
-			return (0);
-
-	if (block->info.timestamp <= prev_block->info.timestamp)
-		return (0);
-
-	block_hash(block, hash_buf);
-
-	if(memcmp(block->hash, hash_buf, SHA256_DIGEST_LENGTH) != 0)
-		return (0);
-
-	if (!hash_matches_difficulty(block->hash, block->info.difficulty))
-		return (0);
-	return (1);
-*/
 }

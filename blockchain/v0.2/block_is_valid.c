@@ -15,7 +15,7 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 	if (!block)
 		return (0);
 
-	if (prev_block == NULL)
+	if (!prev_block)
 	{
 		block_hash(block, hash_buf);
 		if (memcmp(block->hash, hash_buf, SHA256_DIGEST_LENGTH) != 0)

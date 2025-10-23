@@ -12,8 +12,16 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 {
 	uint8_t hash_buf[SHA256_DIGEST_LENGTH];
 
-	if (!block || !prev_block)
+	if (!block)
 		return (0);
+
+	if (prev_block == NULL)
+	{
+		block_hash(block, hash_buf);
+		if (memcmp(block->hash, hash_buf, SHA256_DIGEST_LENGTH) != 0)
+			return (0);
+		return (1);
+	}
 
 	if (block->info.index != prev_block->info.index + 1)
 		return (0);

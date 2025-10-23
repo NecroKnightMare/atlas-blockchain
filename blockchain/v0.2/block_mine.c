@@ -1,5 +1,6 @@
 #include "blockchain.h"
 #include <string.h>
+#include <time.h>
 
 /**
  * block_mine - mines block by finding hash that matches difficulty
@@ -9,20 +10,11 @@ void block_mine(block_t *block)
 {
 	if (!block)
 		return;
+	block->info.nonce = 0;
 
-	block->info.timestamp = 972;
-	block->info.nonce = 59116;
-
-	while (1)
+	do
 	{
 		block_hash(block, block->hash);
-		if (memcmp(block->hash, (uint8_t[]){0x00, 0x00,
-			0x5b, 0x06, 0xc9, 0x2f, 0x45, 0x64, 0x2c,
-			0x69, 0x97, 0xda, 0xae, 0x13, 0x93, 0x77,
-			0x4b, 0x83, 0x4f, 0x72, 0x47, 0x22, 0x5e,
-			0x99, 0x1d, 0x8a, 0x26, 0xeb, 0xd5, 0x05,
-			0x1d, 0x7c}, SHA256_DIGEST_LENGTH) == 0)
-			break;
 		block->info.nonce++;
-	}
+	} while (!hash_matches_difficulty(block->hash, block->info.difficulty));
 }

@@ -18,21 +18,16 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 	if (block->info.index != prev_block->info.index + 1)
 		return (0);
 
-	if (block->info.timestamp <= prev_block->info.timestamp)
-		return (0);
-
 	if (memcmp(block->info.prev_hash, prev_block->hash,
 		SHA256_DIGEST_LENGTH) != 0)
 			return (0);
 
-	if (!block_hash(block, hash_buf) || memcmp(hash_buf, block->hash,
-		SHA256_DIGEST_LENGTH) != 0)
+	if (block->info.timestamp <= prev_block->info.timestamp)
 		return (0);
 
-	if (!hash_matches_difficulty(hash_buf, block->info.difficulty))
-		return (false);
+	block_hash(block, hash_buf);
 
-	if (hash_matches_difficulty(hash_buf, block->info.difficulty) != 0)
+	if(memcmp(block->hash, hash_buf, SHA256_DIGEST_LENGTH) != 0)
 		return (0);
 
 	return (1);

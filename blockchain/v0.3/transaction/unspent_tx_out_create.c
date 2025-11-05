@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "transaction.h"
+#include "llist.h"
+#include "blockchain.h"
 
 /**
  * unspent_tx_out_create - creates and inits an unspent transaction output

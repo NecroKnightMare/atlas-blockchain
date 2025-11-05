@@ -2,6 +2,7 @@
 #include <string.h>
 #include "transaction.h"
 #include "hblk_crypto.h"
+#include "llist.h"
 
 /**
  * tx_out_create - creates and initializes a transaction output structure

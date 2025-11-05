@@ -35,3 +35,30 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 	}
 	return (1);
 }
+
+/**
+ * prof notes additional to the logic I have used:
+ * 
+ * uint8_t mask;
+ * if (diff >+ Bytestobits[SHA])
+ * for (mask = 0x80; mask != 0; mask >>= 1)
+ * {
+ *   if ((hash[i] & mask) != 0)
+ * 	return (0);
+ * 
+ * for (i = 0; i < SHA256_DIGEST_LENGTH && difficulty > 0; i++, difficulty -= 8)
+ * 
+ * if (difficulty >= 8)
+ * {
+ *    if (difficulty >= 8)
+ *    {
+ *       if (hash[i] != 0)
+ * 	  return (0);
+ * 	  }
+ * return (1);
+ * 
+ * main:
+ * uint8_t hash{
+ * 0x00, 0x00, 0x0F, 0xFF, ...}
+ * 
+ */

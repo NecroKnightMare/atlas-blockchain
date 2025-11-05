@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "hblk_crypto.h"
+#include "llist.h"
 
 /**
  * struct tx_out_s - Transaction output structure
@@ -52,6 +53,9 @@ typedef struct tx_in_s {
     sig_t sig;
 } tx_in_t;
 
+/*print functions*/
+int _transaction_print_loop(transaction_t const *transaction, unsigned int indent);
+int _transaction_print_brief_loop(transaction_t const *transaction, unsigned int indent);
 
 /*v0.3 prototypes*/
 tx_out_t *tx_out_create(uint32_t amount, uint8_t const pub[EC_PUB_LEN]);

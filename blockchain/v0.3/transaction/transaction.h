@@ -4,11 +4,6 @@
 #include <stdint.h>
 #include "hblk_crypto.h"
 
-typedef struct transaction_s transaction_t;
-typedef struct tx_in_s tx_in_t;
-typedef struct tx_out_s tx_out_t;
-
-
 /**
  * struct tx_out_s - Transaction output structure
  *
@@ -40,7 +35,7 @@ typedef struct unspent_tx_out_s
 /**
  * 
  */
-struct transaction_s {
+typedef struct transaction_s {
     llist_t *inputs;
     llist_t *outputs;
     uint8_t id[SHA256_DIGEST_LENGTH];
@@ -49,7 +44,7 @@ struct transaction_s {
 /**
  * 
  */
-struct tx_in_s {
+typedef struct tx_in_s {
     uint8_t block_hash[SHA256_DIGEST_LENGTH];
     uint8_t tx_id[SHA256_DIGEST_LENGTH];
     uint8_t tx_out_hash[SHA256_DIGEST_LENGTH];

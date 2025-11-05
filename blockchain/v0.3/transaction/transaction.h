@@ -39,7 +39,7 @@ typedef struct transaction_s {
     llist_t *inputs;
     llist_t *outputs;
     uint8_t id[SHA256_DIGEST_LENGTH];
-}; transaction_t
+} transaction_t;
 
 /**
  * 
@@ -50,7 +50,7 @@ typedef struct tx_in_s {
     uint8_t tx_out_hash[SHA256_DIGEST_LENGTH];
     EC_KEY *sig_pub;
     sig_t sig;
-}; tx_in_t
+} tx_in_t;
 
 
 /*v0.3 prototypes*/

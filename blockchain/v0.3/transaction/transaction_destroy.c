@@ -4,7 +4,6 @@
 /**
  * transaction_destroy - frees a transaction and its contents
  * @transaction: pointer to the transaction to free
- * 
  */
 void transaction_destroy(transaction_t *transaction)
 {

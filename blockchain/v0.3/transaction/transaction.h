@@ -50,7 +50,7 @@ typedef struct transaction_s {
  * struct tx_in_s - Transaction input referencing a previous output
  *
  * @block_hash: Hash of the block containing the referenced output
- * @tx_id: ID of the transaction containing output
+ * @tx_id: ID of the transaction containing the output
  * @tx_out_hash: Hash of the referenced transaction output
  * @sig_pub: Public key of sender
  * @sig: Signature proving ownership of output
@@ -62,12 +62,6 @@ typedef struct tx_in_s {
     EC_KEY *sig_pub;
     sig_t sig;
 } tx_in_t;
-
-typedef struct sig_s {
-    uint8_t sig[72];  // ECDSA signature max size
-    uint32_t len;
-} sig_t;
-
 
 /*print functions*/
 int _transaction_print_loop(transaction_t const *transaction, unsigned int indent);

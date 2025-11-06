@@ -34,7 +34,11 @@ typedef struct unspent_tx_out_s
 } unspent_tx_out_t;
 
 /**
- * 
+ * struct transaction_s - Represents a blockchain transaction
+ *
+ * @inputs: List of transaction inputs
+ * @outputs: List of transaction outputs
+ * @id: SHA-256 hash of the transaction contents
  */
 typedef struct transaction_s {
     llist_t *inputs;
@@ -43,7 +47,13 @@ typedef struct transaction_s {
 } transaction_t;
 
 /**
- * 
+ * struct tx_in_s - Transaction input referencing a previous output
+ *
+ * @block_hash: Hash of the block containing the referenced output
+ * @tx_id: ID of the transaction containing output
+ * @tx_out_hash: Hash of the referenced transaction output
+ * @sig_pub: Public key of sender
+ * @sig: Signature proving ownership of output
  */
 typedef struct tx_in_s {
     uint8_t block_hash[SHA256_DIGEST_LENGTH];
@@ -52,6 +62,12 @@ typedef struct tx_in_s {
     EC_KEY *sig_pub;
     sig_t sig;
 } tx_in_t;
+
+typedef struct sig_s {
+    uint8_t sig[72];  // ECDSA signature max size
+    uint32_t len;
+} sig_t;
+
 
 /*print functions*/
 int _transaction_print_loop(transaction_t const *transaction, unsigned int indent);

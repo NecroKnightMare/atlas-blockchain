@@ -26,7 +26,7 @@ static int match_unspent(void *node, void *hash)
  * Return: pointer to signature structure, NULL on failure
  */
 sig_t *tx_in_sign(tx_in_t *in, uint8_t const tx_id[SHA256_DIGEST_LENGTH],
-    EC_KEY const *sender, llist_t *all_unspent)
+	EC_KEY const *sender, llist_t *all_unspent)
 {
 	unspent_tx_out_t *ref;
 	uint8_t pub[EC_PUB_LEN];
@@ -36,7 +36,7 @@ sig_t *tx_in_sign(tx_in_t *in, uint8_t const tx_id[SHA256_DIGEST_LENGTH],
 
 	ref = llist_find_node(all_unspent,	match_unspent,
 		(void *)in->tx_out_hash);
-    
+
 	if (!ref)
 		return (NULL);
 

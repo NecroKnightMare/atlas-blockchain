@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "transaction.h"
+#include "hblk_crypto.h"
 
 /**
  * match_unspent - helper to find matching unspent output by hash
@@ -42,9 +43,16 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 		ref = llist_find_node(all_unspent, match_unspent, in->tx_out_hash);
 		if (!ref)
 			return (0);
-		if (!ec_verify(ref->out.pub, transaction->id,
-			SHA256_DIGEST_LENGTH, &in->sig))
-			return (0);
+	EC_KEY *pub_key = ec_from_pub(ref->out.pub);
+	if (!pub_key)
+		return (0);
+
+	if (!ec_verify(pub_key, transaction->id, SHA256_DIGEST_LENGTH, &in->sig))
+	{
+		EC_KEY_free(pub_key);
+		return (0);
+	}
+	EC_KEY_free(pub_key);
 
 		total_in += ref->out.amount;
 	}

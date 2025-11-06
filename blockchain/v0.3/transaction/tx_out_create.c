@@ -13,7 +13,7 @@ tx_out_t *tx_out_create(uint32_t amount, uint8_t const pub[EC_PUB_LEN])
 {
 	tx_out_t *out;
 
-	if (!pub || amount == 0)
+	if (pub == NULL || amount == 0)
 		return (NULL);
 
 	out = calloc(1, sizeof(tx_out_t));

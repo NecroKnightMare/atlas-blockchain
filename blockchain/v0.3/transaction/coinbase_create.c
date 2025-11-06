@@ -49,7 +49,7 @@ transaction_t *coinbase_create(EC_KEY const *receiver, uint32_t block_index)
 	out = tx_out_create(COINBASE_AMOUNT, pub);
 	if (!out)
 	{
-		transaction_destroy(tx);
+		free(tx);
 		return (NULL);
 	}
 	llist_add_node(outputs, out, ADD_NODE_REAR);

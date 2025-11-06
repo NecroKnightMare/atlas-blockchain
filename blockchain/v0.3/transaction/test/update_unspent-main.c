@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include "blockchain.h"
+#include "transaction.h"
 
 void _blockchain_print_brief(blockchain_t const *blockchain);
 void _print_hex_buffer(uint8_t const *buf, size_t len);

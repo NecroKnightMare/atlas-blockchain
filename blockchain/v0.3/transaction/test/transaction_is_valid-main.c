@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "blockchain.h"
+#include "transaction.h"
 
 void _transaction_print(transaction_t const *transaction);
 

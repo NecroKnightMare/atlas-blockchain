@@ -112,7 +112,7 @@ for (i = 0; i < count; i++)
 	tx->outputs = outputs;
 	transaction_hash(tx, tx->id);
 
-	for (i = 0; i < llist_size(inputs); i++)
+	for (size_t i = 0; i < llist_size(inputs); i++)
 	{
 		in = llist_get_node_at(inputs, i);
 		if (!tx_in_sign(in, tx->id, sender, all_unspent))

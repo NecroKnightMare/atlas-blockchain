@@ -5,6 +5,8 @@
 #include "hblk_crypto.h"
 #include <llist.h>
 
+#define SIG_MAX_LEN 72
+
 /**
  * struct tx_out_s - Transaction output structure
  *

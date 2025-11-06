@@ -2,18 +2,8 @@
 #include <string.h>
 #include "transaction.h"
 
-/**
- * transaction_destroy - frees a transaction
- * @tx: the transaction to free
- */
-void transaction_destroy(transaction_t *tx)
-{
-	if (!tx)
-		return;
-	llist_destroy(tx->inputs, 1, free);
-	llist_destroy(tx->outputs, 1, free);
-	free(tx);
-}
+
+void transaction_destroy(transaction_t *transaction);
 
 /**
  * match_sender_unspent - helper to match unspent outputs owned by sender

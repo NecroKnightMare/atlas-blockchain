@@ -5,11 +5,11 @@
 
 /**
  * block_create - Creates and initializes a new block
- * @prev: pointer to the previous block in the chain
- * @data: pointer to the data to copy into the new block
+ * @prev: pointer to the previous block in chain
+ * @data: pointer to the data to copy into new block
  * @data_len: number of bytes to copy from @data
  *
- * Return: pointer to the newly created block, or NULL on failure
+ * Return: pointer to the newly created block, NULL on failure
  */
 block_t *block_create(block_t const *prev, int8_t const *data,
 	uint32_t data_len)

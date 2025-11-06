@@ -2,7 +2,7 @@
 #define TRANSACTION_H
 
 #include <stdint.h>
-/*#include "hblk_crypto.h"*/
+#include "hblk_crypto.h"
 #include <llist.h>
 
 #define SIG_MAX_LEN 72

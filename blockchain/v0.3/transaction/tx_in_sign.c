@@ -34,7 +34,8 @@ sig_t *tx_in_sign(tx_in_t *in, uint8_t const tx_id[SHA256_DIGEST_LENGTH],
 	if (!in || !tx_id || !sender || !all_unspent)
 		return (NULL);
 
-	ref = llist_find_node(all_unspent,	match_unspent, (void *)in->tx_out_hash);
+	ref = llist_find_node(all_unspent,	match_unspent,
+		(void *)in->tx_out_hash);
     
 	if (!ref)
 		return (NULL);

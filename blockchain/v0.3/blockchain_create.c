@@ -2,6 +2,7 @@
 #include <string.h>
 #include "blockchain.h"
 
+extern block_t const _genesis;
 
 /**
  * blockchain_create - Creates a new blockchain and inits the genesis block

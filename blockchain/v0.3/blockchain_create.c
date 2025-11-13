@@ -5,23 +5,24 @@
 extern block_t const _genesis;
 
 /**
- * blockchain_create - Creates a new blockchain and inits the genesis block
- * Return: pointer to the new blockchain or NULL if failed
+ * blockchain_create - Creates new blockchain and initializes the genesis block
+ * Return: pointer to the new blockchain NULL on failure
  */
 blockchain_t *blockchain_create(void)
 {
-	blockchain_t *blockchain;
+	blockchain_t *blockchain = calloc(1, sizeof(blockchain_t));
 	block_t *genesis;
 
-	blockchain = calloc(1, sizeof(blockchain_t));
 	if (!blockchain)
 		return (NULL);
+
 	blockchain->chain = llist_create(MT_SUPPORT_FALSE);
 	if (!blockchain->chain)
 	{
 		free(blockchain);
 		return (NULL);
 	}
+
 	blockchain->unspent = llist_create(MT_SUPPORT_FALSE);
 	if (!blockchain->unspent)
 	{
@@ -29,9 +30,21 @@ blockchain_t *blockchain_create(void)
 		free(blockchain);
 		return (NULL);
 	}
-	genesis = genesis_block();
+
+	genesis = calloc(1, sizeof(block_t));
 	if (!genesis)
 	{
+		llist_destroy(blockchain->chain, 1, NULL);
+		llist_destroy(blockchain->unspent, 1, NULL);
+		free(blockchain);
+		return (NULL);
+	}
+
+	memcpy(genesis, &_genesis, sizeof(block_t));
+	genesis->transactions = llist_create(MT_SUPPORT_FALSE);
+	if (!genesis->transactions)
+	{
+		free(genesis);
 		llist_destroy(blockchain->chain, 1, NULL);
 		llist_destroy(blockchain->unspent, 1, NULL);
 		free(blockchain);

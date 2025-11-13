@@ -14,6 +14,8 @@
 #define BLOCK_GENERATION_INTERVAL 1
 #define DIFFICULTY_ADJUSTMENT_INTERVAL 5
 
+/*v0.3 MACROS*/
+#define SIGNATURE_MAX_LEN 72
 
 /*block info struct*/
 typedef struct block_info_s

@@ -1,23 +1,8 @@
 #ifndef _ENDIANNESS_H_
-# define _ENDIANNESS_H_
+#define _ENDIANNESS_H_
 
-# include <stdint.h>
-# include <stddef.h>
-
-typedef union _endian
-{
-	uint32_t n;
-	uint8_t bytes[4];
-} _endian_t;
-
-uint8_t _get_endianness(void);
-void _swap_endian(void *p, size_t size);
-
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-#define _htole32(x) (x)
-#else
-#define _htole32(x) __builtin_bswap32(x)
-
+#include <stdint.h>
+#include <stddef.h>
 
 /*
  * # include <stdint.h>
@@ -40,7 +25,7 @@ void _swap_endian(void *p, size_t size);
  *				((value & 0x00000000000000FFULL) << 56))
  */
 
-# define SWAPENDIAN(value)	_swap_endian((char *)(&value), sizeof(value))
+#define SWAPENDIAN(value) _swap_endian((char *)(&value), sizeof(value))
 
 /**
  * union _endian_u - Used to test endianness

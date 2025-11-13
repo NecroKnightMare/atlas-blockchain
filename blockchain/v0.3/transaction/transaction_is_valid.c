@@ -1,7 +1,6 @@
 #include "blockchain.h"
-#include <openssl/ec.h>
-#include <openssl/obj_mac.h>
 #include "transaction.h"
+#include <openssl/ec.h>
 
 /**
  * transaction_is_valid - verifies a transaction’s integrity and authenticity
@@ -14,7 +13,7 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 	uint8_t hash_buf[SHA256_DIGEST_LENGTH];
 	tx_in_t *tx_in;
 	tx_out_t *tx_out;
-	unspent_tx_out_t *unspent;
+	unspent_tx_out_t *unspent, *u;
 	EC_KEY *pub_key;
 	int i, j;
 	int input_count, output_count, unspent_count;
@@ -40,7 +39,7 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 		unspent = NULL;
 		for (j = 0; j < unspent_count; j++)
 		{
-			unspent_tx_out_t *u = llist_get_node_at(all_unspent, j);
+			u = llist_get_node_at(all_unspent, j);
 			if (!u)
 				continue;
 
@@ -55,6 +54,7 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 
 		if (!unspent)
 			return (0);
+
 		pub_key = ec_from_pub(unspent->out.pub);
 		if (!pub_key || !ec_verify(pub_key, transaction->id, SHA256_DIGEST_LENGTH, &tx_in->sig))
 		{

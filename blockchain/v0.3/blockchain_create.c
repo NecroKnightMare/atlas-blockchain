@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "blockchain.h"
-#include "block.h"
 
 
 /**

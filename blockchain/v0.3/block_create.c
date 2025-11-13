@@ -14,47 +14,28 @@
 block_t *block_create(block_t const *prev, int8_t const *data,
 	uint32_t data_len)
 {
-	blockchain_t *blockchain = calloc(1, sizeof(blockchain_t));
-	block_t *genesis;
-	llist_t *chain, *unspent;
+	block_t *block = calloc(1, sizeof(block_t));
 
-	if (!blockchain)
+	if (!block)
 		return (NULL);
 
-	chain = llist_create(MT_SUPPORT_FALSE);
-	if (!chain)
+	block->info.index = prev ? prev->info.index + 1 : 0;
+	memcpy(block->info.prev_hash, prev ? prev->hash :
+		(uint8_t[SHA256_DIGEST_LENGTH]){0}, SHA256_DIGEST_LENGTH);
+	block->info.timestamp = (uint64_t)time(NULL);
+	block->info.difficulty = prev ? prev->info.difficulty : 0;
+	block->info.nonce = 0;
+
+	block->data.len = data_len > BLOCKCHAIN_DATA_MAX ? BLOCKCHAIN_DATA_MAX :
+	data_len;
+	memcpy(block->data.buffer, data, block->data.len);
+
+	block->transactions = llist_create(MT_SUPPORT_FALSE);
+	if (!block->transactions)
 	{
-		free(blockchain);
+		free(block);
 		return (NULL);
 	}
 
-	unspent = llist_create(MT_SUPPORT_FALSE);
-	if (!unspent)
-	{
-		llist_destroy(chain, 1, NULL);
-		free(blockchain);
-		return (NULL);
-	}
-
-	genesis = genesis_block();
-	if (!genesis)
-	{
-		llist_destroy(chain, 1, NULL);
-		llist_destroy(unspent, 1, NULL);
-		free(blockchain);
-		return (NULL);
-	}
-
-	if (llist_add_node(chain, genesis) == -1)
-	{
-		block_destroy(genesis);
-		llist_destroy(chain, 1, NULL);
-		llist_destroy(unspent, 1, NULL);
-		free(blockchain);
-		return (NULL);
-	}
-
-	blockchain->chain = chain;
-	blockchain->unspent = unspent;
-	return (blockchain);
-	}
+	return (block);
+}

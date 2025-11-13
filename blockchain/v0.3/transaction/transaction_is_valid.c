@@ -1,4 +1,7 @@
 #include "blockchain.h"
+#include <string.h>
+#include <openssl/ec.h>
+#include <openssl/sha.h>
 #include "transaction.h"
 
 /**
@@ -13,23 +16,18 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 	tx_in_t *tx_in;
 	tx_out_t *tx_out;
 	unspent_tx_out_t *unspent;
-	uint32_t i, j;
-	int input_count, output_count;
+	EC_KEY *pub_key;
+	size_t i, j;
 	uint32_t total_in = 0, total_out = 0;
 
 	if (!transaction || !all_unspent)
 		return (0);
 
-	/* 1. Verify transaction hash */
 	transaction_hash(transaction, hash_buf);
 	if (memcmp(hash_buf, transaction->id, SHA256_DIGEST_LENGTH) != 0)
 		return (0);
 
-	input_count = llist_size(transaction->inputs);
-	output_count = llist_size(transaction->outputs);
-
-	/* 2. Validate each input */
-	for (i = 0; i < input_count; i++)
+	for (i = 0; i < llist_size(transaction->inputs); i++)
 	{
 		tx_in = llist_get_node_at(transaction->inputs, i);
 		if (!tx_in)
@@ -54,13 +52,20 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 		if (!unspent)
 			return (0);
 
-		if (!ec_verify(unspent->out.pub, tx_in->sig.sig, tx_in->sig.len, transaction->id))
+		pub_key = ec_from_pub(unspent->out.pub);
+		if (!pub_key || !ec_verify(pub_key, transaction->id, SHA256_DIGEST_LENGTH, &tx_in->sig))
+		{
+			if (pub_key)
+				EC_KEY_free(pub_key);
 			return (0);
+		}
+		EC_KEY_free(pub_key);
 
 		total_in += unspent->out.amount;
 	}
 
-	for (i = 0; i < output_count; i++)
+
+	for (i = 0; i < llist_size(transaction->outputs); i++)
 	{
 		tx_out = llist_get_node_at(transaction->outputs, i);
 		if (!tx_out)

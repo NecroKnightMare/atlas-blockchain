@@ -42,4 +42,13 @@ typedef union _endian_u
 uint8_t	_get_endianness(void);
 void _swap_endian(void *p, size_t size);
 
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#define _htole32(x) (x)
+#else
+#define _htole32(x) __builtin_bswap32(x)
+#endif
+
+#define SWAPENDIAN(value) _swap_endian((char *)(&value), sizeof(value))
+
+
 #endif /* ! _ENDIANNESS_H_ */

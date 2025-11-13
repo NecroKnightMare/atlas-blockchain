@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "blockchain.h"
+#include "block.h"
 
 
 /**
@@ -37,7 +38,7 @@ blockchain_t *blockchain_create(void)
 		return (NULL);
 	}
 
-	if (llist_add_node(blockchain->chain, genesis) == -1)
+	if (llist_add_node(blockchain->chain, genesis, ADD_NODE_REAR) == -1)
 	{
 		block_destroy(genesis);
 		llist_destroy(blockchain->chain, 1, NULL);

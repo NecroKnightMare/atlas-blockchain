@@ -69,5 +69,6 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 	uint32_t difficulty);
 void block_mine(block_t *block);
 uint32_t blockchain_difficulty(blockchain_t const *blockchain);
+block_t *genesis_block(void);
 
 #endif // BLOCKCHAIN_H //

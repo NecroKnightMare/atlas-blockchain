@@ -47,6 +47,7 @@ extern const block_t _genesis;
 typedef struct blockchain_s
 {
 	llist_t *chain;
+	llist_t *unspent;
 } blockchain_t;
 
 /* v0.1 prototypes */
@@ -69,4 +70,4 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 void block_mine(block_t *block);
 uint32_t blockchain_difficulty(blockchain_t const *blockchain);
 
-#endif // BLOCKCHAIN_H
+#endif // BLOCKCHAIN_H //

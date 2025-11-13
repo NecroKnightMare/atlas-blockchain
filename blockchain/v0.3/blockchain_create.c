@@ -12,27 +12,36 @@ blockchain_t *blockchain_create(void)
 	blockchain_t *blockchain;
 	block_t *genesis;
 
-	blockchain = malloc(sizeof(*blockchain));
+	blockchain = calloc(1, sizeof(blockchain_t));
 	if (!blockchain)
 		return (NULL);
-	blockchain->chain = llist_create(MT_SUPPORT_TRUE);
+	blockchain->chain = llist_create(MT_SUPPORT_FALSE);
 	if (!blockchain->chain)
 	{
 		free(blockchain);
 		return (NULL);
 	}
-	genesis = malloc(sizeof(*genesis));
-	if (!genesis)
+	blockchain->unspent = llist_create(MT_SUPPORT_FALSE);
+	if (!blockchain->unspent)
 	{
 		llist_destroy(blockchain->chain, 1, NULL);
 		free(blockchain);
 		return (NULL);
 	}
-	memcpy(genesis, &_genesis, sizeof(block_t));
-	if (llist_add_node(blockchain->chain, genesis, ADD_NODE_REAR) == -1)
+	genesis = genesis_block();
+	if (!genesis)
 	{
-		free(genesis);
 		llist_destroy(blockchain->chain, 1, NULL);
+		llist_destroy(blockchain->unspent, 1, NULL);
+		free(blockchain);
+		return (NULL);
+	}
+
+	if (llist_add_node(blockchain->chain, genesis) == -1)
+	{
+		block_destroy(genesis);
+		llist_destroy(blockchain->chain, 1, NULL);
+		llist_destroy(blockchain->unspent, 1, NULL);
 		free(blockchain);
 		return (NULL);
 	}

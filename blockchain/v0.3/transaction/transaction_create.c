@@ -2,9 +2,6 @@
 #include <string.h>
 #include "transaction.h"
 
-
-void transaction_destroy(transaction_t *transaction);
-
 /**
  * match_sender_unspent - helper to match unspent outputs owned by sender
  */
@@ -107,7 +104,9 @@ for (i = 0; i < count; i++)
 		in = llist_get_node_at(inputs, i);
 		if (!tx_in_sign(in, tx->id, sender, all_unspent))
 		{
-			transaction_destroy(tx);
+			llist_destroy(tx->inputs, 1, free);
+			llist_destroy(tx->outputs, 1, free);
+			free(tx);
 			return (NULL);
 		}
 	}
